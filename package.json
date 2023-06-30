@@ -1,0 +1,20 @@
+{
+  "name": "playwright-architecture-poc",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "npx playwright test",
+    "test:headed": "npx playwright test --headed",
+    "test:example": "npm run test tests/example.spec.ts -- --headed"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@playwright/test": "^1.35.1",
+    "dotenv": "^16.3.1",
+    "prettier": "^2.8.8"
+  }
+}
