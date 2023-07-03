@@ -2,9 +2,16 @@ import { Locator, Page, expect } from "@playwright/test";
 import { PpgApi } from "../utils/ppgApi.utils";
 
 export class LoginPage extends PpgApi {
+  // private _userId: string;
+
   constructor(page: Page) {
     super(page);
+    // this.initialize();
   }
+
+  // async initialize() {
+  //   this._userId = await this.ppgApi.customPpgRequest('GET', '/aai/user/ID')
+  // }
 
   ppgApi = new PpgApi(this.page);
 
@@ -22,5 +29,15 @@ export class LoginPage extends PpgApi {
 
   async verification(): Promise<void> {
     await expect(this.verificationLogo).toBeVisible();
+  }
+
+  async ppgRequestTest(): Promise<void> {
+    const response = await this.ppgApi.customPpgRequest('GET', `/aai/user`)
+    console.log('PPG response: ', response)
+  }
+
+  async loginByApiTest(username: string, password: string): Promise<void> {
+    const response = await this.ppgApi.loginByAPI(username, password)
+    console.log('Login request response: ', response)
   }
 }
