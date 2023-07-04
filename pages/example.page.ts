@@ -19,6 +19,11 @@ export class LoginPage extends PpgApi {
   passwordInput: Locator = this.page.locator("input[type='password']");
   loginButton: Locator = this.page.locator("button[type='submit']");
 
+  projectsButton: Locator = this.page.locator("a[href='/projects']");
+  favouriteProjectsStar: Locator = this.page.locator(
+    "button[aria-label='Add project to favourites']:first-child",
+  );
+
   verificationLogo: Locator = this.page.locator("img[alt='PPG Logo']");
 
   async login(userName: string, password: string): Promise<void> {
@@ -27,17 +32,20 @@ export class LoginPage extends PpgApi {
     await this.loginButton.click();
   }
 
-  async verification(): Promise<void> {
+  async navToProjects(): Promise<void> {
+    await this.projectsButton.click();
+  }
+
+  async projectsViewVerification(): Promise<void> {
+    await expect(this.favouriteProjectsStar).toBeVisible();
+  }
+
+  async loginVerification(): Promise<void> {
     await expect(this.verificationLogo).toBeVisible();
   }
 
   async ppgRequestTest(): Promise<void> {
-    const response = await this.ppgApi.customPpgRequest('GET', `/aai/user`)
-    console.log('PPG response: ', response)
-  }
-
-  async loginByApiTest(username: string, password: string): Promise<void> {
-    const response = await this.ppgApi.loginByAPI(username, password)
-    console.log('Login request response: ', response)
+    const response = await this.ppgApi.customPpgRequest("GET", `/aai/user`);
+    console.log("PPG response: ", response);
   }
 }

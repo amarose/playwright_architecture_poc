@@ -1,6 +1,7 @@
 import { test } from "../playwright/fixtures";
 import { LoginPage } from "../pages/example.page";
 
+// Copy&Paste from example.spec.ts. Only for testing parallel run
 test.describe("User login", () => {
   let loginPage: LoginPage;
 
@@ -9,7 +10,7 @@ test.describe("User login", () => {
     await page.goto("/");
   });
 
-  test("login success", async () => {
+  test("login success 2", async () => {
     //Arrange
 
     //Act
@@ -31,7 +32,7 @@ test.describe("User login", () => {
   });
 });
 
-test.describe("User in app", () => {
+test.describe("User in app 2", () => {
   let loginPage: LoginPage;
 
   test.beforeEach(async ({ page }) => {
