@@ -3,7 +3,10 @@ import fs from "fs";
 import path from "path";
 import { loginData } from "../test-data/login.data";
 
-const domainHost = process.env.ENV === "prod" ? "https://next.mngppg.co" : "https://next.master1.qappg.co"
+const domainHost =
+  process.env.ENV === "prod"
+    ? "https://next.mngppg.co"
+    : "https://next.master1.qappg.co";
 
 export * from "@playwright/test";
 export const test = baseTest.extend<{}, { workerStorageState: string }>({

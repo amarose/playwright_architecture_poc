@@ -8,16 +8,12 @@ const apiHost =
     ? "https://api.pushpushgo.com"
     : "https://api.master1.qappg.co";
 
-type Token = {
-  token: string;
-};
-
-interface UserInfoLS {
+interface IUserInfoLS {
   id: string;
   organization: string;
 }
 
-interface ApiMethods {
+interface IApiMethods {
   methods: "POST" | "PUT" | "DELETE" | "GET";
 }
 
@@ -26,40 +22,44 @@ export class PpgApi {
   constructor(page: Page) {
     this.page = page;
   }
+
+  // Get localStorage item
+  async getValueFromLocalStorage(item: string): Promise<any> {
+    const ppgLocalStorageUserInfo = await this.page.evaluate((item) => {
+      const localStorageJson = localStorage.getItem(item);
+      return localStorageJson ? JSON.parse(localStorageJson) : null;
+    }, item);
+    return ppgLocalStorageUserInfo;
+  }
   //project ID
 
   //website integration ID
 
   //organization ID
   async getOrganizationId(): Promise<string> {
-    const ppgLocalStorageUserInfo: UserInfoLS = await this.page.evaluate(() => {
-      const localStorageJson = localStorage.getItem("queen_auth_user_id");
-      return localStorageJson ? JSON.parse(localStorageJson) : null;
-    });
-    return ppgLocalStorageUserInfo.organization;
+    const ppgLocalStorage: IUserInfoLS = await this.getValueFromLocalStorage(
+      "queen_auth_user_id",
+    );
+    return ppgLocalStorage.organization;
   }
 
   //user ID
   async getUserId(): Promise<string> {
-    const ppgLocalStorageUserInfo: UserInfoLS = await this.page.evaluate(() => {
-      const localStorageJson = localStorage.getItem("queen_auth_user_id");
-      return localStorageJson ? JSON.parse(localStorageJson) : null;
-    });
-    return ppgLocalStorageUserInfo.id;
+    const ppgLocalStorage: IUserInfoLS = await this.getValueFromLocalStorage(
+      "queen_auth_user_id",
+    );
+    return ppgLocalStorage.id;
   }
 
   //token
   private async getToken(): Promise<string> {
-    const ppgLocalStorageToken: string = await this.page.evaluate(() => {
-      const localStorageToken = localStorage.getItem("queen_token");
-      return localStorageToken ? JSON.parse(localStorageToken) : null;
-    });
-    return ppgLocalStorageToken;
+    const ppgLocalStorage = await this.getValueFromLocalStorage("queen_token");
+    return ppgLocalStorage;
   }
 
   //custom request method
   async customPpgRequest(
-    method: ApiMethods["methods"],
+    method: IApiMethods["methods"],
     endpoint: string,
     optionalData?: any,
   ): Promise<any> {

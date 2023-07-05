@@ -1,6 +1,7 @@
 import { test } from "../playwright/fixtures";
 import { LoginPage } from "../pages/example.page";
 
+test.describe.configure({ mode: "serial" });
 test.describe("User login", () => {
   let loginPage: LoginPage;
 
@@ -39,7 +40,7 @@ test.describe("User in app", () => {
     await page.goto("/");
   });
 
-  test("login success", async () => {
+  test("login success 2", async () => {
     //Arrange
 
     //Act
@@ -49,7 +50,7 @@ test.describe("User in app", () => {
     await loginPage.ppgRequestTest();
   });
 
-  test("navigate to projects view", async () => {
+  test("navigate to projects view 2", async () => {
     //Arrange
 
     //Act

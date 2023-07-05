@@ -19,7 +19,7 @@ export class LoginPage extends PpgApi {
   passwordInput: Locator = this.page.locator("input[type='password']");
   loginButton: Locator = this.page.locator("button[type='submit']");
 
-  projectsButton: Locator = this.page.locator("a[href='/projects']");
+  projectsButton: Locator = this.page.locator("div > a[href='/projects']");
   favouriteProjectsStar: Locator = this.page.locator(
     "button[aria-label='Add project to favourites']:first-child",
   );
