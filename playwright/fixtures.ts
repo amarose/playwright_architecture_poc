@@ -1,7 +1,7 @@
 import { test as baseTest } from "@playwright/test";
 import fs from "fs";
 import path from "path";
-import { loginData } from "../test-data/login.data";
+import { loginData } from "../test-data/creds.data";
 
 const domainHost =
   process.env.ENV === "prod"
