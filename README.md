@@ -3,7 +3,7 @@
 Żeby móc uruchomić testy trzeba zainstalować Playwright i jego przeglądarki za pomoca komendy:
 
 ```bash
-npm install playwright
+npx playwright install
 ```
 
 # Jak uruchomić testy
